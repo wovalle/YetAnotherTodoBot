@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "source": "dist/functions",
+    "predeploy": "npm clean && npm build:funcs && npm deps:copy && npm deps:install"
+  }
+}
