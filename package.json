@@ -20,20 +20,20 @@
     "firebase-tools": "^3.18.4",
     "mocha": "^5.1.1",
     "ngrok": "^3.0.1",
-    "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2"
   },
   "scripts": {
     "dev": "run-p build:funcs:watch serve",
     "test": "mocha --require @babel/register src/**/*.test.js",
+    "test:watch": "mocha --watch --require @babel/register src/**/*.test.js",
     "lint": "eslint .",
     "serve": "firebase serve --only functions",
     "deploy": "firebase deploy --only functions",
     "ngrok": "ngrok http 5000",
     "clean": "rimraf 'dist/functions'",
     "build:funcs": "babel 'src/functions' --out-dir 'dist/functions'",
-    "build:funcs:watch": "nodemon -x 'npm run build:funcs' -w src",
+    "build:funcs:watch": "babel -w'src/functions' --out-dir 'dist/functions'",
     "deps:copy": "cpx '*{package.json,package-lock.lock}' 'dist/functions'",
     "deps:install": "cd 'dist/functions' && npm install"
   },
