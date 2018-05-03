@@ -12,6 +12,8 @@
     "@babel/cli": "^7.0.0-beta.46",
     "@babel/core": "^7.0.0-beta.46",
     "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/register": "^7.0.0-beta.46",
+    "chai": "^4.1.2",
     "cpx": "^1.5.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
@@ -24,7 +26,7 @@
   },
   "scripts": {
     "dev": "run-p build:funcs:watch serve",
-    "test": "mocha src/**/*.test.js",
+    "test": "mocha --require @babel/register src/**/*.test.js",
     "lint": "eslint .",
     "serve": "firebase serve --only functions",
     "deploy": "firebase deploy --only functions",

@@ -1,7 +1,29 @@
+import { assert } from 'chai';
+
+import createTodoService from '../services/todo';
+import createTodoRepository from '../repositories/todos';
+
+let fakeTodoStore = [];
+
+const currentDate = new Date();
+const todoService = createTodoService({
+  currentDate: () => currentDate,
+  storage: {
+    todos: createTodoRepository(fakeTodoStore),
+  },
+});
+
 describe('TodoService', () => {
+  beforeEach(() => { fakeTodoStore = []; });
+
   describe('#create', () => {
     it('Should fail if no text is given');
-    it('Should be able to create a task');
+    it('Should be able to create a task', async () => {
+      const todo = await todoService.insert({ text: 'my first todo' });
+      assert.equal(todo.id, 1);
+      assert.equal(todo.status, 'Pending');
+      assert.deepEqual(todo.createdAt, currentDate);
+    });
   });
   describe('#list', () => {
     it('Should list all the tasks for an user');
