@@ -5,7 +5,7 @@ const TodoStatus = {
 
 export default ({ storage, currentDate }) => ({
   insert: async ({ text, userId }) => {
-    const nextNumber = storage.configs.getNextNumber();
+    const nextNumber = await storage.configs.incrementCounter();
     const createdAt = currentDate();
 
     const todo = {
@@ -17,7 +17,6 @@ export default ({ storage, currentDate }) => ({
     };
 
     await storage.todos.insert(todo);
-
     return todo;
   },
   list: async ({ userId }) => {

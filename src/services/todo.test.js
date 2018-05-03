@@ -2,11 +2,12 @@ import { assert } from 'chai';
 
 import createTodoService from '../services/todo';
 import createTodoRepository from '../repositories/todos';
+import createConfigsRepository from '../repositories/configs';
 
 let fakeMemoryStore = {
   todos: [],
   configs: {
-    counter: 1,
+    counter: 0,
   },
 };
 
@@ -19,13 +20,11 @@ describe('TodoService', () => {
       currentDate: () => currentDate,
       storage: {
         todos: createTodoRepository(fakeMemoryStore.todos),
-        configs: {
-          getNextNumber: () => fakeMemoryStore.configs.counter++,
-        },
+        configs: createConfigsRepository(fakeMemoryStore.configs),
       },
     });
 
-    fakeMemoryStore = { todos: [], configs: { counter: 1 } };
+    fakeMemoryStore = { todos: [], configs: { counter: 0 } };
   });
 
   describe('#create', () => {
