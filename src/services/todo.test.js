@@ -1,8 +1,8 @@
 import { assert } from 'chai';
 
 import createTodoService from '../services/todo';
-import createTodoRepository from '../repositories/todos';
-import createConfigsRepository from '../repositories/configs';
+import createTodoRepository from '../repositories/todos.memory';
+import createConfigsRepository from '../repositories/configs.memory';
 
 let fakeMemoryStore = {
   todos: [],
@@ -42,6 +42,9 @@ describe('TodoService', () => {
   describe('#list', () => {
     it('Should fail if status is invalid');
     it('Should fail if user is invalid');
+    it('Should fail if user asks for another user outside the group');
+    it('Should fail if user asks for another users todos in private');
+
     it('Should list all the todos for an user', async () => {
       await todoService.insert({ text: 'todo1', userId: 'wovalle' });
       await todoService.insert({ text: 'todo2', userId: 'wovalle' });

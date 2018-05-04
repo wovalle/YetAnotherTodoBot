@@ -19,10 +19,8 @@ export default ({ storage, currentDate }) => ({
     await storage.todos.insert(todo);
     return todo;
   },
-  list: async ({ userId }) => {
-    return storage.todos.list({ userId });
-  },
-  finish: async ({ userId, id }) => {
+  list: async ({ userId }) => storage.todos.list({ userId }),
+  finish: async ({ id }) => {
     const params = {
       updatedAt: currentDate(),
       finishedAt: currentDate(),
@@ -31,7 +29,5 @@ export default ({ storage, currentDate }) => ({
 
     return storage.todos.update(id, params);
   },
-  get: async ({ userId }) => {
-    return storage.todos.list({ userId });
-  },
+  get: async ({ userId }) => storage.todos.list({ userId }),
 });
