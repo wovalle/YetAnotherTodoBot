@@ -33,7 +33,7 @@
     "ngrok": "ngrok http 5000",
     "clean": "rimraf 'dist/functions'",
     "build:funcs": "babel 'src/functions' --out-dir 'dist/functions'",
-    "build:funcs:watch": "babel -w'src/functions' --out-dir 'dist/functions'",
+    "build:funcs:watch": "babel -w 'src/functions' --out-dir 'dist/functions'",
     "deps:copy": "cpx '*{package.json,package-lock.lock}' 'dist/functions'",
     "deps:install": "cd 'dist/functions' && npm install"
   },

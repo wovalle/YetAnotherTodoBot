@@ -1,9 +1,13 @@
-import { https } from 'firebase-functions';
+import * as functions from 'firebase-functions';
+import admin from 'firebase-admin';
+import initializeRoutes from './routes';
 
-const message = () => 'ello';
+admin.initializeApp(functions.config().firebase);
+
+const db = admin.database();
+
+const message = 'world!';
 
 // eslint-disable-next-line import/prefer-default-export
-export const helloWorld = https.onRequest(async (req, res) => {
-  const world = await message();
-  res.status(200).send(`Hello ${world}`);
-});
+export const routes = initializeRoutes({ db, message });
+
